@@ -2,8 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var console_1 = require("console");
 var fs = require("fs");
-var readFile = function () { };
-fs.readFile("countries.txt", "utf8", function (error, data) {
+fs.readFile(".gitignore", "utf8", function (error, data) {
     if (error) {
         throw error;
     }
@@ -39,12 +38,11 @@ fs.readFile("countries.txt", "utf8", function (error, data) {
     // log(dataWhitDensity);
     // log(dataWhitError);
     var orderByDensity = dataWhitDensity.sort(function (a, b) { return b.density - a.density; });
-    var ultimateDataCountry = [];
+    var ultimateDataCountry = ['Countries Population Area Density'];
     dataWhitDensity.forEach(function (element) {
         ultimateDataCountry.push(element.element + ' ' + element.density);
-        (0, console_1.log)(ultimateDataCountry);
     });
     fs.createWriteStream('countries.csv');
-    fs.appendFile('countries.csv', ultimateDataCountry.toString(), function (error) { if (error)
-        throw error; });
+    fs.appendFile('countries.csv', ultimateDataCountry.join('\n').replaceAll(' ', ','), function (error) { if (error)
+        throw error; (0, console_1.log)('all ok'); });
 });

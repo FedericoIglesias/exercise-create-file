@@ -1,9 +1,9 @@
 import { log } from "console";
 import * as fs from "fs";
 
-const readFile = () => {};
 
-fs.readFile("countries.txt", "utf8", (error, data) => {
+
+fs.readFile(".gitignore", "utf8", (error, data) => {
   if (error) {
     throw error;
   }
@@ -45,14 +45,13 @@ fs.readFile("countries.txt", "utf8", (error, data) => {
 
   const orderByDensity = dataWhitDensity.sort((a, b) => b.density - a.density)
 
-  let ultimateDataCountry = [] 
+  let ultimateDataCountry = ['Countries Population Area Density'] 
   
   dataWhitDensity.forEach(element => {
     ultimateDataCountry.push(element.element + ' ' + element.density)
-
-    log(ultimateDataCountry)
   })
 
+
   fs.createWriteStream('countries.csv')
-  fs.appendFile('countries.csv', ultimateDataCountry.toString(), (error) => {if(error)throw error})
+  fs.appendFile('countries.csv', ultimateDataCountry.join('\n').replaceAll(' ', ','), (error) => {if(error)throw error; log('all ok')})
 });
